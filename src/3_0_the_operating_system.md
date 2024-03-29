@@ -1,46 +1,28 @@
-# The Operating System
+# 操作系统
 
-The operating system stands in the center of everything we do as programmers (well, unless you're [writing an Operating System](https://os.phil-opp.com/) or are in the [Embedded realm](https://rust-embedded.github.io/book/)),
-so there is no way for us to discuss any kind of fundamentals in programming
-without talking about operating systems in a bit of detail. 
+操作系统是我们作为程序员所做的一切的中心（嗯，除非您正在[编写操作系统](https://os.phil-opp.com/)或处于[嵌入式领域](https://rust-embedded.github.io/book/)），因此，我们无法在不稍微详细地讨论操作系统的情况下讨论任何编程基础知识。
 
-## Concurrency from the operating systems perspective
+## 操作系统角度的并发性
 
-<div style="color: back;  font-style: italic; font-size: 1.2em">"Operating systems has been "faking" synchronous execution since the 90's."</div>
+<div style="color: back;  font-style: italic; font-size: 1.2em">"自上世纪90年代以来，操作系统一直在“伪装”同步执行"</div>
 
-This ties into what I talked about in the first chapter when I said that `concurrent`
-needs to be talked about within a reference frame and I explained that the OS
-might stop and start your process at any time.
+这与我在第一章中谈到的内容相关，当时我说**并发**需要在一个参考框架内讨论，并且我解释了操作系统可能会在任何时候停止和启动您的进程。
 
-What we call synchronous code is in most cases code that appears as synchronous 
-to us as programmers. Neither the OS or the CPU live in a fully synchronous world.
+我们所说的同步代码在大多数情况下是指对我们程序员来说看起来是同步的代码。操作系统和CPU都不生活在完全同步的世界中。
 
-Operating systems uses `preemptive multitasking` and as long as the operating 
-system you're running is preemptively scheduling processes, you won't have a 
-guarantee that your code runs instruction by instruction without interruption. 
+操作系统使用**抢占式多任务处理**，只要您运行的操作系统是抢占式调度进程的，您就无法保证您的代码会按照指令一步一步地执行而不受干扰。
 
-The operating system will make sure that all important processes gets some time from the CPU to make progress.
+操作系统将确保所有重要的进程都获得一些CPU时间来取得进展。
 
-> This is not as simple when we're talking about modern machines with 4-6-8-12
-> physical cores since you might actually execute code on one of the CPU's
-> uninterrupted if the system is under very little load. The important part here
-> is that you can't know for sure and there is no guarantee that you code will be
-> left to run uninterrupted.
+> 当我们谈论拥有4-6-8-12个物理核心的现代计算机时，情况就不那么简单了，因为如果系统的负载很小，您实际上可能会在其中一个CPU上连续执行代码。这里的重要部分是，您无法确定，也无法保证您的代码会被连续执行。
 
 
-## Teaming up with the OS.
+## 与操作系统搭档
 
-When programming it's often easy to forget how many moving pieces that need to
-cooperate when we care about efficiency. When you make a web request, you're not
-asking the CPU or the network card to do something for you, you're asking the
-operating system to talk to the network card for you.
+在编程时，往往容易忘记在关注效率时需要合作的许多组成部分。当您发起一个网络请求时，您不是要求CPU或网络卡为您做某事，而是要求操作系统为您与网络卡进行通信。
 
-There is no way for you as a programmer to make your system optimally efficient
-without playing to the operating systems strengths. You basically don't have
-access to the hardware directly. 
+作为程序员，您无法使系统在不充分利用操作系统的情况下达到最佳效率。您基本上无法直接访问硬件。
 
-However this also means that to understand everything from the ground up, you'll
-also need to know how your operating system handles these tasks.
+然而，这也意味着要从底层了解一切，您还需要了解操作系统如何处理这些任务。
 
-To be able to work with the operating system, we'll need to know how we can communicate with it and that's exactly what we're going to go through next.
-
+为了能够与操作系统一起工作，我们需要知道如何与操作系统进行通信，这正是我们接下来要讨论的内容。
